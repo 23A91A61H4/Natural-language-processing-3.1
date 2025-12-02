@@ -1,0 +1,7 @@
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize # returns regular python list
+enlgish_stopwords=stopwords.words('english') # add list of words
+english_stopwords.extend(['food','meal','eat'])  #add single word
+english_stopwords.append('plate')  # remove single word
+english_stopwords.remove('not')
+print(english_stopwords)
