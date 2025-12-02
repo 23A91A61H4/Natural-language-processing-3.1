@@ -1,0 +1,42 @@
+def is_valid_email(email):
+    email = email.strip()
+    if ' ' in email:
+        return False, "Email contains spaces."
+    if email.count('@') != 1:
+        return False, "Email must contain exactly one '@'."
+    local_part, domain_part = email.split('@')
+    if not local_part:
+        return False, "Local part (before @) is empty."
+    if local_part.startswith('.') or local_part.endswith('.'):
+        return False, "Local part cannot start or end with a dot."
+    if '.' not in domain_part:
+        return False, "Domain part must contain at least one dot (e.g., gmail.com)."
+    if domain_part.startswith('.') or domain_part.endswith('.'):
+        return False, "Domain part cannot start or end with a dot."
+    return True, "Valid email address."
+
+def extract_email_components(email):
+    local_part, domain_part = email.split('@')
+    domain_parts = domain_part.split('.')
+    mail_server = domain_parts[0]
+    tld = '.'.join(domain_parts[1:])
+    return {
+        'Local Part (Username)': local_part,
+        'Mail Server': mail_server,
+        'Top Level Domain (TLD)': tld,
+        'Full Domain': domain_part
+    }
+
+email_input = input("Enter an email address: ").strip()
+is_valid, reason = is_valid_email(email_input)
+
+print("\nResult:")
+if is_valid:
+    print(reason)
+    components = extract_email_components(email_input)
+    print("Components Breakdown:")
+    for key, value in components.items():
+        print(f"   {key}: {value}")
+else:
+    print("Invalid email address:")
+    print("Reason:", reason)
