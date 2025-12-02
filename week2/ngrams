@@ -1,0 +1,28 @@
+import nltk
+from nltk.util import ngrams
+text = "Education empowers students to learn and education\
+        helps teachers to guide and education creates\
+        opportunities to learn and grow in education system around \
+        the world"
+words = text.split()
+#Create bigram from the list of words
+unigrams = ngrams(words,1)
+bigrams = ngrams(words,2)
+trigrams = ngrams(words,3)
+quadgrams = ngrams(words,4)
+print("=== Unigrams ===")
+for unigram in unigrams:
+  print(unigram)
+print("\n=== Bigrams ===")
+for bigram in bigrams:
+  print(bigram)
+print("\n=== Trigrams ===")
+for trigram in trigrams:
+  print(trigram)
+print("\n=== Quadgrams ===")
+for quadgram in quadgrams:
+  print(quadgram)
+
+ for result in [unigrams,bigrams,trigrams,quadgrams]:
+   for grams in result:
+     print(grams)
