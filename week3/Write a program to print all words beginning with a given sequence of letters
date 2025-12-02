@@ -1,0 +1,10 @@
+text = """Natural language processing is a fascinating area of artificial intelligence.
+It deals with how computers understand and generate human language."""
+words = text.split()
+print(words)
+prefix = input("Enter the starting sequence: ").lower()
+print(f"Words beginning with '{prefix}':")
+for word in words:
+  clean_word = word.strip('.,!?;:').lower()
+  if clean_word.startswith(prefix):
+    print(clean_word)
