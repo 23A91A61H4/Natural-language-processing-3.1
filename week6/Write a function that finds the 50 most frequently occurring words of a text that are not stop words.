@@ -1,0 +1,18 @@
+from collections import Counter
+import nltk
+from nltk.corpus import stopwords
+import re
+# download stopwords (only first time)
+nltk.download('stopwords')
+def top_non_stopwords(text, n=50):
+  #load english stopwords
+  stop_words = set(stopwords.words("english"))
+  #tokenize: extract words only
+  words = re.findall(r'\w+', text.lower())
+  #remove stopwords
+  filtered = [w for w in words if w not in stop_words]
+  #count most common
+  return Counter(filtered).most_common(n)
+
+text = "This is not a way to move forward. This way is wrong, and we should not consider it. Moving forward is the best way."
+print(top_non_stopwords(text,10))
