@@ -1,0 +1,7 @@
+text = "Natural language processing is a fascinating area of artificial intelligence."
+words = text.split()
+print("Words loinger than 4 characters:")
+for word in words:
+  clean_word = word.strip('.,!?;:')
+  if len(clean_word) > 4:
+    print(clean_word)
