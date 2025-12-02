@@ -1,0 +1,26 @@
+import nltk
+from nltk.collocations import BigramCollocationFinder, TrigramCollocationFinder
+from nltk.metrics import BigramAssocMeasures, TrigramAssocMeasures
+from nltk.corpus import stopwords
+import string
+nltk.download('punkt_tab')
+nltk.download('stopwords')
+text = """Natural language processing is a fascinating area of artificial intelligence.
+It deals with how computers understand and generate human language.
+Word collocations are pairs of words that appear together more often than by chance.
+For example, 'artificial intelligence','machine learning', and 'deep learning'."""
+tokens = nltk.word_tokenize(text.lower())
+stop_words = set(stopwords.words('english'))
+filtered_tokens = [t for t in tokens if t not in stop_words and t not in string.punctuation]
+print("\n=== Top Bigram Collocations (with PMI scores) ===\n")
+bigram_finder = BigramCollocationFinder.from_words(filtered_tokens)
+bigram_finder.apply_freq_filter(1)
+scored_bigrams = bigram_finder.score_ngrams(BigramAssocMeasures.pmi)
+for (w1,w2), score in scored_bigrams[:10]:
+  print(f"{w1} - {w2} | PMI: {score:.4f}")
+print("\n=== Top Trigram Collocations (with PMI scores) ===\n")
+trigram_finder = TrigramCollocationFinder.from_words(filtered_tokens)
+trigram_finder.apply_freq_filter(1)
+scored_trigrams = trigram_finder.score_ngrams(TrigramAssocMeasures.pmi)
+for (w1,w2,w3), score in scored_trigrams[:10]:
+  print(f"{w1} - {w2} - {w3} | PMI: {score:.4f}")
