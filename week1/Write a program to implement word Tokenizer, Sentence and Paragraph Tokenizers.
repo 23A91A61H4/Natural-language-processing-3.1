@@ -1,0 +1,25 @@
+import nltk
+from nltk.tokenize import word_tokenize, sent_tokenize
+nltk.download('punkt_tab')  #pretrained unsupervised sentence tokenizer.
+text= """
+Artificial Intelligence is transforming healthcare. It helps doctors diagonse diseases early.
+Moreover, AI enables personalizeed treatement for each patient
+
+This shift can improve outcomes and reduces costs. Many hospitals now rely on AI-powered systems.
+"""
+# Word Tokenizer
+word_tokens = word_tokenize(text)
+print("Word Tokens:")
+print(word_tokens)
+
+#Sentence Tokenizer
+sent_tokens = sent_tokenize(text)
+print("\nSentence Tokens:")
+for i, sent in enumerate(sent_tokens, 1):
+  print(f"{i}:{sent}")
+
+# Paragraph Tokenizer (Manual split)
+paragraphs = [p.strip() for p in text.strip().split('\n\n') if p]
+print("\nParagraph Tokens:")
+for i,para in enumerate(paragraphs, 1):
+  print(f"paragraph {i}: {para}")z
