@@ -1,0 +1,13 @@
+import nltk
+from nltk.stem import WordNetLemmatizer
+
+# Download WordNet data (only first time)
+nltk.download('wordnet')
+nltk.download('omw-1.4')
+
+lemmatizer = WordNetLemmatizer()
+
+words = ["running", "studies", "better", "went"]
+
+for word in words:
+    print(word, "->", lemmatizer.lemmatize(word, pos='v'))  # 'v' means verb
